@@ -1,15 +1,12 @@
 const exec = require('child_process').exec;
-
-function getDate(date) {
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-}
+const { getDateString } = require('./helpers');
 
 /**
  * http://docs.aws.amazon.com/cli/latest/reference/ec2/create-snapshot.html
  */
 function createSnapshot(volumeId) {
   const today = new Date();
-  const description = `automatic snapshot - ${getDate(today)}`;
+  const description = `automatic snapshot - ${getDateString(today)}`;
   const cmd = `aws ec2 create-snapshot --volume-id ${volumeId} --description "${description}"`;
 
   return new Promise((resolve, reject) => {

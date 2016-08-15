@@ -1,7 +1,7 @@
 const schedule = require('node-schedule');
-const _ = require('lodash');
 const ec2 = require('./ec2-backup');
 const { VOLUME_ID } = require('../config');
+const { getDayString, cloneDeep } = require('./helpers');
 
 /**
  * this keeps track of all snapshots
@@ -18,11 +18,6 @@ function recordWeeksInfo(snapshotsInfo) {
   snapshotsInfo.threeWeeksAgo = snapshotsInfo.twoWeeksAgo;
   snapshotsInfo.twoWeeksAgo = snapshotsInfo.oneWeekAgo;
   snapshotsInfo.oneWeekAgo = snapshotsInfo.Sunday;
-}
-
-function getDayString(date) {
-  const dayStrings = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return dayStrings[date.getDay()];
 }
 
 /**
