@@ -1,3 +1,4 @@
+const fs = require('fs');
 const schedule = require('node-schedule');
 const ec2 = require('./ec2-backup');
 const { VOLUME_ID } = require('../config');
@@ -28,25 +29,26 @@ function dailySchedule() {
   schedule.scheduleJob('0 0 23 * * *', () => {
     ec2.createSnapshot()
     .then(snapshot => {
+      const today = new Date();
       // string rep of the day
       const todayDayString = getDayString(today);
 
       // copy the current snapshot info of the same day (which is last week)
-      const old = _.cloneDeep(snapshots[todayDayString]);
+      const old = cloneDeep(snapshots[todayDayString]);
 
       // store the new snapshot in the state
-      snapshots[getDayString(today)] = snapshot;
+      snapshots[todayDayString] = snapshot;
 
       // manage weeks information
       if (todayDayString === 'Sunday') {
-        const fourWeeksAgo = _.cloneDeep(snapshots.fourWeeksAgo);
-        recordWeeksInfo();
+        const fourWeeksAgo = cloneDeep(snapshots.fourWeeksAgo);
+        recordWeeksInfo(snapshots);
 
         // delete the snapshot four weeks ago.
-        deleteSnapShot(fourWeeksAgo.SnapshotId);
+        ec2.deleteSnapShot(fourWeeksAgo.SnapshotId);
       } else {
         // delete the old snapshot
-        deleteSnapShot(old.SnapshotId);
+        ec2.deleteSnapShot(old.SnapshotId);
       }
 
       // save the snapshot to file for backup
