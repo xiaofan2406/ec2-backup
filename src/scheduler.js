@@ -22,11 +22,11 @@ function recordWeeksInfo(snapshotsInfo) {
 }
 
 /**
- *
+ * @TODO make the breakpoint flexible
  */
-function scheduler(schedule) {
+function scheduler(scheduleString) {
   // https://github.com/node-schedule/node-schedule
-  schedule.scheduleJob(schedule, () => {
+  schedule.scheduleJob(scheduleString, () => {
     ec2.createSnapshot()
     .then(snapshot => {
       const today = new Date();
@@ -34,21 +34,21 @@ function scheduler(schedule) {
       const todayDayString = getDayString(today);
 
       // copy the current snapshot info of the same day (which is last week)
-      const old = cloneDeep(snapshots[todayDayString]);
+      const old = snapshots[todayDayString].SnapshotId;
 
       // store the new snapshot in the state
       snapshots[todayDayString] = snapshot;
 
       // manage weeks information
       if (todayDayString === 'Sunday') {
-        const fourWeeksAgo = cloneDeep(snapshots.fourWeeksAgo);
-        recordWeeksInfo(snapshots);
-
         // delete the snapshot four weeks ago.
-        ec2.deleteSnapShot(fourWeeksAgo.SnapshotId);
+        const fourWeeksAgo = snapshots.fourWeeksAgo.SnapshotId;
+        ec2.deleteSnapShot(fourWeeksAgo);
+
+        recordWeeksInfo(snapshots);
       } else {
         // delete the old snapshot
-        ec2.deleteSnapShot(old.SnapshotId);
+        ec2.deleteSnapShot(old);
       }
 
       // save the snapshot to file for backup
