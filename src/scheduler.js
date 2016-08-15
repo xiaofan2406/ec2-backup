@@ -8,10 +8,10 @@ const { getDayString, cloneDeep } = require('./helpers');
  * this keeps track of all snapshots
  * it needs to read its initial state from a file incase of applicaiton failure.
  */
-let snapshots = require('../snapshots-state.json');
+let snapshots = require('./snapshots-state.json');
 
 function saveSnapshotsState(snapshotsState) {
-  fs.writeFile('../snapshots-state.json', JSON.stringify(snapshotsState, ' ', 2));
+  fs.writeFile('./snapshots-state.json', JSON.stringify(snapshotsState, ' ', 2));
 }
 
 function recordWeeksInfo(snapshotsInfo) {
@@ -24,9 +24,9 @@ function recordWeeksInfo(snapshotsInfo) {
 /**
  *
  */
-function dailySchedule() {
+function scheduler(schedule) {
   // https://github.com/node-schedule/node-schedule
-  schedule.scheduleJob('0 0 23 * * *', () => {
+  schedule.scheduleJob(schedule, () => {
     ec2.createSnapshot()
     .then(snapshot => {
       const today = new Date();
@@ -57,4 +57,4 @@ function dailySchedule() {
   });
 }
 
-module.exports = dailySchedule;
+module.exports = scheduler;

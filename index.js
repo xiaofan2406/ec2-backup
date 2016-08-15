@@ -1,8 +1,10 @@
 const chalk = require('chalk');
-const dailySchedule = require('./src/daily-scheduler');
+const scheduler = require('./src/scheduler');
 
 process.stdout.write('\x1bc');
-dailySchedule();
+
+scheduler('0 0 23 * * *'); // every day 23:00:00
+
 console.log(chalk.green('Back up program running...'));
 console.log();
 console.log(chalk.cyan('The scheduler will run every day on 23:00'));
