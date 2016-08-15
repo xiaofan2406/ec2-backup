@@ -1,0 +1,57 @@
+{
+  "fourWeeksAgo": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:10 GMT+1000 (AEST)",
+    "SnapshotId": "129454a3-3e0b-4920-b14d-6457c7037a9b"
+  },
+  "threeWeeksAgo": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:17 GMT+1000 (AEST)",
+    "SnapshotId": "3baf00f3-15c1-48ab-bc6c-03d72c7af7c6"
+  },
+  "twoWeeksAgo": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:24 GMT+1000 (AEST)",
+    "SnapshotId": "bba5d964-23e9-409a-9551-30f4559d9a2d"
+  },
+  "oneWeekAgo": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:31 GMT+1000 (AEST)",
+    "SnapshotId": "88c8a4e5-1da0-4631-a860-5f6424582534"
+  },
+  "Sunday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:31 GMT+1000 (AEST)",
+    "SnapshotId": "88c8a4e5-1da0-4631-a860-5f6424582534"
+  },
+  "Monday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:32 GMT+1000 (AEST)",
+    "SnapshotId": "7aa91ac2-d7b1-47e6-95d7-766220532a78"
+  },
+  "Tuesday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:33 GMT+1000 (AEST)",
+    "SnapshotId": "b7715a1c-219f-49d8-9c87-bc2c630d495c"
+  },
+  "Wednesday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:27 GMT+1000 (AEST)",
+    "SnapshotId": "a9bcf483-a156-4af9-b5f8-4a21bccddfa4"
+  },
+  "Thursday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:28 GMT+1000 (AEST)",
+    "SnapshotId": "91846f39-17d8-4bba-a6ca-292f69de3ec4"
+  },
+  "Friday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:29 GMT+1000 (AEST)",
+    "SnapshotId": "e9158935-3254-43c7-bc70-3b9c320d9c73"
+  },
+  "Saturday": {
+    "VolumeId": "vol-cfb04ad8",
+    "StartTime": "Mon Aug 15 2016 17:13:30 GMT+1000 (AEST)",
+    "SnapshotId": "6ac83e07-60f0-4936-b3f9-d9e2b7bdd184"
+  }
+}
