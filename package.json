@@ -4,9 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "cp -n config.js.EXAMPLE config.js",
+    "start": "pm2 start index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "aws",
+    "ec2",
+    "backup"
+  ],
+  "author": "Xiaofan Wu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaofan2406/ec2-backup.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "lodash": "^4.15.0",
+    "node-schedule": "^1.1.1",
+    "pm2": "^1.1.3"
+  }
 }
