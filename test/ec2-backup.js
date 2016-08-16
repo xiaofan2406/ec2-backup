@@ -15,8 +15,7 @@ function createSnapshot(volumeId) {
       "StartTime": (new Date()).toString(),
       "SnapshotId": id
     };
-    console.log('\tcreating snapshot...');
-    fs.writeFile(`./${id}.txt`, JSON.stringify(snapshot, ' ', 2), err => {
+    fs.writeFile(`./temp/${id}.txt`, JSON.stringify(snapshot, ' ', 2), err => {
       if (err) {
         return reject(err);
       }
@@ -30,8 +29,7 @@ function createSnapshot(volumeId) {
  */
 function deleteSnapShot(snapshotId) {
   return new Promise((resolve, reject) => {
-    console.log('\tremoving snapshot...');
-    fs.unlink(`./${snapshotId}.txt`, err => {
+    fs.unlink(`./temp/${snapshotId}.txt`, err => {
       if (err) {
         return reject(err);
       }

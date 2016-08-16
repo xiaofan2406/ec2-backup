@@ -1,6 +1,7 @@
 const fs = require('fs');
 const schedule = require('node-schedule');
 const ec2 = require('./ec2-backup');
+const logger = require('./logger');
 const { volumeIds } = require('../config');
 const { getDayString, cloneDeep } = require('./helpers');
 
@@ -33,7 +34,6 @@ try {
   }
 }
 
-
 function saveSnapshotsState(snapshotsState) {
   return new Promise((resolve, reject) => {
     fs.writeFile('./snapshots-state.json', JSON.stringify(snapshotsState, ' ', 2), err => {
@@ -59,7 +59,8 @@ function backupSingleVolume(volumeId) {
     const today = new Date();
     // string rep of the day
     const todayDayString = getDayString(today);
-    console.log(todayDayString);
+    logger.info(`${todayDayString}-${volumeId}: creating snapshot - SUCCESS.`);
+
     // copy the current snapshot info of the same day (which is last week)
     const old = volumeState[todayDayString].SnapshotId;
 
@@ -69,27 +70,39 @@ function backupSingleVolume(volumeId) {
     // manage weeks information
     if (todayDayString === 'Sunday') {
       const fourWeeksAgo = volumeState.fourWeeksAgo.SnapshotId;
-
-      // delete the snapshot four weeks ago.
       ec2.deleteSnapShot(fourWeeksAgo)
       .then(res => {
-        console.log('removed');
+        logger.info(`${todayDayString}-${volumeId}: Removing old snapshot 4 weeks ago - SUCCESS.`);
       })
       .catch(err => {
-        console.log(err);
+        logger.info(`${todayDayString}-${volumeId}: Removing old snapshot 4 weeks ago - ERROR.`);
+        logger.info(JSON.stringify(err));
       });
 
       recordWeeksInfo(volumeState);
     } else {
-      // delete the old snapshot
       ec2.deleteSnapShot(old)
       .then(res => {
-        console.log('removed');
+        logger.info(`${todayDayString}-${volumeId}: Removing old snapshot previous weeks - SUCCESS.`);
       })
       .catch(err => {
-        console.log(err);
+        logger.info(`${todayDayString}-${volumeId}: Removing old snapshot previous weeks - ERROR.`);
+        logger.info(JSON.stringify(err));
       });
     }
+
+    saveSnapshotsState(snapshots)
+    .then(() => {
+      logger.info(`${todayDayString}-${volumeId}: Saving snapshots state - SUCCESS.`);
+    })
+    .catch(err => {
+      logger.info(`${todayDayString}-${volumeId}: Saving snapshots state - ERROR.`);
+      logger.info(JSON.stringify(err));
+    });
+  })
+  .catch(err => {
+    logger.info(`${todayDayString}-${volumeId} creating snapshot - ERROR.`);
+    logger.info(JSON.stringify(err));
   });
 }
 
@@ -102,14 +115,7 @@ function scheduler(timeString) {
     for (const volumeId of volumeIds) {
       backupSingleVolume(volumeId);
     }
-    saveSnapshotsState(snapshots)
-    .then(() => {
-      console.log('save state success');
-    })
-    .catch(err => {
-      console.log('save state fail', err);
-    });
   });
 }
 
-scheduler('* * 10 * * *');
+scheduler('* * 11 * * *');
