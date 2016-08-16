@@ -42,3 +42,4 @@ node_modules/
 ###################
 logs/
 config.js
+napshots-state.json
