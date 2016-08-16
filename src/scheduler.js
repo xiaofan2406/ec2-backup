@@ -75,7 +75,7 @@ function backupSingleVolume(volumeId) {
       })
       .catch(err => {
         logger.info(`${todayDayString}-${volumeId}: Removing old snapshot 4 weeks ago - ERROR.`);
-        logger.info(err);
+        logger.info(JSON.stringify(err));
       });
 
       recordWeeksInfo(volumeState);
@@ -86,7 +86,7 @@ function backupSingleVolume(volumeId) {
       })
       .catch(err => {
         logger.info(`${todayDayString}-${volumeId}: Removing old snapshot previous weeks - ERROR.`);
-        logger.info(err);
+        logger.info(JSON.stringify(err));
       });
     }
 
@@ -96,12 +96,12 @@ function backupSingleVolume(volumeId) {
     })
     .catch(err => {
       logger.info(`${todayDayString}-${volumeId}: Saving snapshots state - ERROR.`);
-      logger.info(err);
+      logger.info(JSON.stringify(err));
     });
   })
   .catch(err => {
     logger.info(`${todayDayString}-${volumeId} creating snapshot - ERROR.`);
-    logger.info(err);
+    logger.info(JSON.stringify(err));
   });
 }
 
