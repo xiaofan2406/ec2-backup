@@ -2,10 +2,9 @@ function cloneDeep(object) {
   return JSON.parse(JSON.stringify(object));
 }
 
-let i = 0;
 function getDayString(date) {
   const dayStrings = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return dayStrings[(i++) % 7];
+  return dayStrings[date.getSeconds() % 7];
 }
 
 function getDateString(date) {
