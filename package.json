@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "cp -n config.js.EXAMPLE config.js && mkdir -p logs",
-    "start": "pm2 start index.js"
+    "start": "pm2 start index.js --name \"ec2-backup\""
   },
   "keywords": [
     "aws",
