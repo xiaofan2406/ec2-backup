@@ -12,6 +12,10 @@
     "ec2",
     "backup"
   ],
+  "engines": {
+    "node": "6.3.1",
+    "npm": "3.10.3"
+  },
   "author": "Xiaofan Wu",
   "repository": {
     "type": "git",
