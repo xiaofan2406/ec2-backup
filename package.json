@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cp -n config.js.EXAMPLE config.js",
+    "postinstall": "cp -n config.js.EXAMPLE config.js && mkdir -p logs",
     "start": "pm2 start index.js"
   },
   "keywords": [
