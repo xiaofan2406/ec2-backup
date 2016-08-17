@@ -1,6 +1,6 @@
-# ec2 backup
+# auto ec2 snapshot
 
-a simple node program to automatically backup ec2 instance
+a simple node program to automatically create snapshots ec2 volumes
 
 ```
 npm i
@@ -34,3 +34,25 @@ aws configure
   More information: http://docs.aws.amazon.com/cli/latest/userguide/installing.html
 
   EC2 documentation: http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
+
+
+#### Restore using snapshot
+
+- Create a brand new instance from the snapshot
+  - Launche a new instance
+  - Stop the new instance
+  - Force detach its root volume
+  - Create a volume from a snapshot
+  - Attache the new volume to the new instance at `/dev/sda1`
+  - Start the new instance again
+
+
+- Restore to the current instance (not tested)
+  - Stop the instance
+  - Force detach its root volume
+  - Create a volume from a snapshot
+  - Attache the new volume to the instance at `/dev/sda1`
+  - Start the instance again
+
+
+- Using AMI?
